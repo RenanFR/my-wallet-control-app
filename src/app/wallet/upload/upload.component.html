@@ -1,1 +1,180 @@
-<p>upload works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                Upload de <strong>Extrato</strong> Bancário
+                </div>
+                <div class="card-body">
+                  <form 
+                      [formGroup]="bankStatementForm" 
+                      method="post" 
+                      enctype="multipart/form-data" 
+                      class="form-horizontal" 
+                      (submit)="onUpload()">
+
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-university"></i></span>
+                          </div>
+                          <input 
+                              formControlName="account" 
+                              type="text" 
+                              id="account" 
+                              name="account" 
+                              class="form-control" 
+                              placeholder="CONTA">
+                        </div>
+                        <wallet-error 
+                        *ngIf="(bankStatementForm.get('account').errors?.required 
+                              && bankStatementForm.get('account').touched)" 
+                        errorMessage="O NÚMERO DA CONTA É OBRIGATÓRIO">
+                        </wallet-error>                          
+                      </div>                      
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="period-start">PERÍODO INICIAL</label>
+                          <div class="col-md-9">
+                            <input 
+                                  formControlName="periodStart" 
+                                  class="form-control" 
+                                  id="period-start" 
+                                  type="date" 
+                                  name="period-start" 
+                                  placeholder="date">
+                            <wallet-error 
+                              *ngIf="(bankStatementForm.get('periodStart').errors?.invalidDateRange 
+                                    && bankStatementForm.get('periodStart').touched)" 
+                              errorMessage="A DATA FINAL DO PERÍODO NÃO PODE SER SUPERIOR A HOJE OU INFERIOR A 1945">
+                            </wallet-error>
+                          </div>
+                        </div>                    
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="period-end">PERÍODO FINAL</label>
+                          <div class="col-md-9">
+                            <input formControlName="periodEnd" class="form-control" id="period-end" type="date" name="period-end" placeholder="date">
+                            <wallet-error 
+                              *ngIf="(bankStatementForm.get('periodEnd').errors?.invalidDateRange 
+                                    && bankStatementForm.get('periodEnd').touched)" 
+                              errorMessage="A DATA FINAL DO PERÍODO NÃO PODE SER SUPERIOR A HOJE OU INFERIOR A 1945">
+                            </wallet-error>
+                            <wallet-error 
+                              *ngIf="(bankStatementForm.get('periodStart').touched 
+                                    && bankStatementForm.get('periodEnd').touched
+                                    && bankStatementForm.errors?.periodExceeded)" 
+                              errorMessage="O PERÍODO ABRANGIDO NÃO PODE SER MAIOR QUE TRÊS MESES">
+                            </wallet-error>
+                          </div>
+                      </div>                    
+                      <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="rdo-extension">EXTENSÃO</label>
+                          <div class="col-md-9 col-form-label">
+                            <div class="form-check form-check-inline mr-1" id="rdo-extension">
+                              <input formControlName="fileExtension" 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="fileExtension" 
+                                    id="rdo-pdf" 
+                                    [value]="extensions.PDF" 
+                                    (change)="enableControlAndExtension(extensions.PDF)">
+                              <label class="form-check-label" for="rdo-pdf">PDF</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1" id="rdo-extension">
+                              <input formControlName="fileExtension" 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="fileExtension" 
+                                    id="rdo-csv" 
+                                    [value]="extensions.CSV" 
+                                    (change)="enableControlAndExtension(extensions.CSV)">
+                              <label class="form-check-label" for="rdo-csv">CSV</label>
+                            </div>
+                            <div class="form-check form-check-inline mr-1" id="rdo-extension">
+                              <input formControlName="fileExtension" 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="fileExtension" 
+                                    id="rdo-XLSX " 
+                                    [value]="extensions.XLSX" 
+                                    (change)="enableControlAndExtension(extensions.XLSX)">
+                              <label class="form-check-label" for="rdo-XLSX">XLSX </label>
+                            </div>
+                          </div>
+                      </div>   
+                      <ng-template [ngIf]="enableColumnControls">
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="column-date">COLUNA DATA DO LANÇAMENTO</label>
+                          <div class="col-md-9">
+                            <select 
+                                formControlName="columnDate" 
+                                id="column-date" 
+                                name="column-date" 
+                                class="form-control form-control-sm">
+                              <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
+                            </select>
+                          </div>
+                        </div>                        
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="column-description">COLUNA DESCRIÇÃO</label>
+                          <div class="col-md-9">
+                            <select 
+                                formControlName="columnDescription" 
+                                id="column-description" 
+                                name="column-description" 
+                                class="form-control form-control-sm">
+                              <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
+                            </select>
+                          </div>
+                        </div>                        
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="column-value">COLUNA VALOR</label>
+                          <div class="col-md-9">
+                            <select 
+                                formControlName="columnValue" 
+                                id="column-value" 
+                                name="column-value" 
+                                class="form-control form-control-sm">
+                              <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
+                            </select>
+                          </div>
+                        </div>                        
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="column-balance">COLUNA SALDO</label>
+                          <div class="col-md-9">
+                            <select 
+                                formControlName="columnBalance" 
+                                id="column-balance" 
+                                name="column-balance" 
+                                class="form-control form-control-sm">
+                              <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
+                            </select>
+                          </div>
+                        </div>                        
+                    </ng-template>                 
+                      <div class="form-group row">
+                      <label class="col-md-3 col-form-label" for="statement-file">SELECIONE OS EXTRATOS</label>
+                      <div class="col-md-9">
+                          <input 
+                              type="file" 
+                              id="statement-file" 
+                              name="statement-file" 
+                              (change)="handleFiles($event.target.files)"
+                              [accept]="acceptedExtensions"
+                              multiple>
+                      </div>
+                      </div>
+                      <div class="card-footer">
+                        <button type="submit" 
+                                class="btn btn-sm btn-primary"
+                                [disabled]="(bankStatementForm.pending || bankStatementForm.invalid)">
+                                <i class="fa fa-dot-circle-o"></i> ENVIAR
+                        </button>
+                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> LIMPAR</button>
+                      </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>
+  

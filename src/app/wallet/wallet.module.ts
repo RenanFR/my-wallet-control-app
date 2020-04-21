@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { WalletRoutingModule } from './wallet-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FinancialDashboardComponent } from './dashboard/financial-dashboard.component';
 import { UploadComponent } from './upload/upload.component';
-
+import { WalletRoutingModule } from './wallet-routing.module';
+import { UploadService } from './upload/upload.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,15 @@ import { UploadComponent } from './upload/upload.component';
   ],
   imports: [
     CommonModule,
-    WalletRoutingModule
+    WalletRoutingModule,
+    SharedModule,
+    HttpClientModule,
+    MatProgressBarModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  providers: [
+    UploadService
   ]
 })
 export class WalletModule { }
