@@ -8,6 +8,7 @@ import { UploadComponent } from './upload/upload.component';
 import { WalletRoutingModule } from './wallet-routing.module';
 import { UploadService } from './upload/upload.service';
 import { SharedModule } from '../shared/shared.module';
+import { FinancialDashboardService } from './dashboard/financial-dashboard.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule
   ],
   providers: [
-    UploadService
+    UploadService,
+    FinancialDashboardService
   ]
 })
 export class WalletModule { }

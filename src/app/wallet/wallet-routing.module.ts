@@ -13,10 +13,10 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard'
+        redirectTo: 'upload'
       },
       {
-        path: 'dashboard',
+        path: 'dashboard/:account',
         component: FinancialDashboardComponent,
         data: {
           title: 'Financial Dashboard'

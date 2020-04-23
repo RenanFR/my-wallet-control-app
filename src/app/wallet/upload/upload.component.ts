@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FileExtension } from './file.extension';
-import { StatementUploadDTO } from './statement.upload.dto';
+import { BankStatement } from '../../shared/models/bank.statement';
+import { FileExtension } from '../../shared/models/file.extension';
 import { UploadService } from './upload.service';
 import { dateRangeCustomValidator } from './validation/date.range.custom.validator';
 import { verifyMaximumPeriod } from './validation/verify.maximum.period';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-upload',
@@ -27,10 +29,12 @@ export class UploadComponent implements OnInit {
     'Q', 'R', 'S', 'T', 'U', 
     'V', 'W', 'X', 'Y', 'Z'
   ];
+  accountToRedirect: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -54,13 +58,18 @@ export class UploadComponent implements OnInit {
   }
 
   onUpload(): void {
-    const statementUploadDTO = this.bankStatementForm.getRawValue() as StatementUploadDTO;
+    const statementUploadDTO = this.bankStatementForm.getRawValue() as BankStatement;
     this.uploadService
       .upload(statementUploadDTO, this.files[0])
+      .pipe(finalize(() => {
+        this.router.navigate(['/wallet/dashboard', this.accountToRedirect]);
+      }))
       .subscribe(r => {
+        console.log(r);
         const status = r.status;
-        const accountToRedirect = r.body;
-        console.log('Response status ' + status + ', account to redirect ' + accountToRedirect);
+        if (status === 200) {
+          this.accountToRedirect = r.body;
+        }
       });
   }
 

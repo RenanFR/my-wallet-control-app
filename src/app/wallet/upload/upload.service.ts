@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { StatementUploadDTO } from './statement.upload.dto';
+import { BankStatement } from '../../shared/models/bank.statement';
 
 const base:string = `${environment.SERVER_URL}/upload`;
 
@@ -11,7 +11,7 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  public upload(statementUploadDTO: StatementUploadDTO, file: File): Observable<any> {
+  public upload(statementUploadDTO: BankStatement, file: File): Observable<any> {
     const form = new FormData();
     form.append('account', statementUploadDTO.account);
     form.append('periodStart', statementUploadDTO.periodStart);
