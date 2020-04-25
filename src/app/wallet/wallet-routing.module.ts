@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FinancialDashboardComponent } from './dashboard/financial-dashboard.component';
+import { BankStatementEntriesComponent } from './bank-statement/bank-statement-entries.component';
 import { UploadComponent } from './upload/upload.component';
+import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,13 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'upload'
+      },
+      {
+        path: 'entries/:account',
+        component: BankStatementEntriesComponent,
+        data: {
+          title: 'Bank statement entries'
+        }
       },
       {
         path: 'dashboard/:account',

@@ -17,6 +17,7 @@ export class UploadService {
     form.append('periodStart', statementUploadDTO.periodStart);
     form.append('periodEnd', statementUploadDTO.periodEnd);
     form.append('fileExtension', statementUploadDTO.fileExtension);
+    form.append('bank', statementUploadDTO.bank);
     form.append('columnDate', statementUploadDTO.columnDate);
     form.append('columnDescription', statementUploadDTO.columnDescription);
     form.append('columnValue', statementUploadDTO.columnValue);

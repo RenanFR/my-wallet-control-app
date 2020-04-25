@@ -7,11 +7,11 @@ import { BankStatement } from '../../shared/models/bank.statement';
 const base:string = `${environment.SERVER_URL}/financial`;
 
 @Injectable()
-export class FinancialDashboardService {
+export class BankStatementEntriesService {
 
   constructor(private http: HttpClient) { }
 
-  public upload(account: string): Observable<BankStatement> {
+  public getByAccount(account: string): Observable<BankStatement> {
     return this
       .http
       .get<BankStatement>(`${base}/${account}`);  

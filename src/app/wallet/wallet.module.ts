@@ -3,17 +3,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { FinancialDashboardComponent } from './dashboard/financial-dashboard.component';
+import { BankStatementEntriesComponent } from './bank-statement/bank-statement-entries.component';
 import { UploadComponent } from './upload/upload.component';
 import { WalletRoutingModule } from './wallet-routing.module';
 import { UploadService } from './upload/upload.service';
 import { SharedModule } from '../shared/shared.module';
-import { FinancialDashboardService } from './dashboard/financial-dashboard.service';
+import { BankStatementEntriesService } from './bank-statement/bank-statement-entries.service';
+import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
 
 @NgModule({
   declarations: [
-    FinancialDashboardComponent,
-    UploadComponent
+    BankStatementEntriesComponent,
+    UploadComponent,
+    FinancialDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,7 @@ import { FinancialDashboardService } from './dashboard/financial-dashboard.servi
   ],
   providers: [
     UploadService,
-    FinancialDashboardService
+    BankStatementEntriesService
   ]
 })
 export class WalletModule { }

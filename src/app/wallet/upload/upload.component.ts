@@ -7,11 +7,10 @@ import { dateRangeCustomValidator } from './validation/date.range.custom.validat
 import { verifyMaximumPeriod } from './validation/verify.maximum.period';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { Bank } from '../../shared/models/bank';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  templateUrl: './upload.component.html'
 })
 export class UploadComponent implements OnInit {
 
@@ -22,6 +21,7 @@ export class UploadComponent implements OnInit {
   supportedExtensions: string = '.pdf,.xls,.xlsx,.csv,.pdf';
   acceptedExtensions: string = '.pdf';
   extensions = FileExtension;
+  banks = Bank;
   alphabet: string[] = [
     'A', 'B', 'C', 'D', 'E', 
     'F', 'G', 'H', 'I', 'K', 
@@ -48,6 +48,7 @@ export class UploadComponent implements OnInit {
       periodStart: [ suggestedStart, [ dateRangeCustomValidator ] ],
       periodEnd:  [ today, [ dateRangeCustomValidator ] ],
       fileExtension: [ this.extensions.PDF ],
+      bank: [ this.banks.INTER ],
       columnDate: [ 'A' ],
       columnDescription: [ 'B' ],
       columnValue: [ 'C' ],
@@ -62,10 +63,9 @@ export class UploadComponent implements OnInit {
     this.uploadService
       .upload(statementUploadDTO, this.files[0])
       .pipe(finalize(() => {
-        this.router.navigate(['/wallet/dashboard', this.accountToRedirect]);
+        this.router.navigate(['/wallet/entries', this.accountToRedirect]);
       }))
       .subscribe(r => {
-        console.log(r);
         const status = r.status;
         if (status === 200) {
           this.accountToRedirect = r.body;

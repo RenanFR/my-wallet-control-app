@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FinancialDashboardService } from './financial-dashboard.service';
+import { BankStatementEntriesService } from './bank-statement-entries.service';
 import { BankStatement } from '../../shared/models/bank.statement';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-financial-dashboard',
-  templateUrl: './financial-dashboard.component.html',
-  styleUrls: ['./financial-dashboard.component.css']
+  templateUrl: './bank-statement-entries.component.html'
 })
-export class FinancialDashboardComponent implements OnInit {
+export class BankStatementEntriesComponent implements OnInit {
 
   bankStatement: BankStatement;
 
   constructor(
     private route: ActivatedRoute,
-    private financialDashboardService: FinancialDashboardService
+    private bankStatementEntriesService: BankStatementEntriesService
   ) { }
 
   ngOnInit(): void {
     let account = this.route.snapshot.params.account;
-    this.financialDashboardService.upload(account)
+    this.bankStatementEntriesService.getByAccount(account)
         .subscribe(response => {
-          console.log(response);
           this.bankStatement = response;
         });
   }

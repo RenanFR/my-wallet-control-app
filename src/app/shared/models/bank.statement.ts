@@ -1,5 +1,6 @@
 import { BankStatementEntry } from './bank-statement-entry';
 import { FileExtension } from './file.extension';
+import { Bank } from './bank';
 
 export class BankStatement {
 	
@@ -22,5 +23,7 @@ export class BankStatement {
 	entries: BankStatementEntry[ ];
 
 	preSignedURL: string;
+
+	bank: Bank;
 
 }
