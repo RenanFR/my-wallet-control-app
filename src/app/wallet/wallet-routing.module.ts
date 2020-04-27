@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BankStatementEntriesComponent } from './bank-statement/bank-statement-entries.component';
-import { UploadComponent } from './upload/upload.component';
+import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
+import { BankStatementUploadComponent } from './bank-statement/upload/bank-statement-upload.component';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
 
 
@@ -32,7 +32,7 @@ const routes: Routes = [
       },
       {
         path: 'upload',
-        component: UploadComponent,
+        component: BankStatementUploadComponent,
         data: {
           title: 'Upload Bank Statement'
         }

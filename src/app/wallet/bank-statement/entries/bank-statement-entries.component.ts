@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BankStatementEntriesService } from './bank-statement-entries.service';
-import { BankStatement } from '../../shared/models/bank.statement';
+import { BankStatementEntriesService } from './service/bank-statement-entries.service';
+import { BankStatement } from '../../../shared/models/bank.statement';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

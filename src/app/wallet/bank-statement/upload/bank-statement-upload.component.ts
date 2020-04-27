@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BankStatement } from '../../shared/models/bank.statement';
-import { FileExtension } from '../../shared/models/file.extension';
-import { UploadService } from './upload.service';
+import { BankStatement } from '../../../shared/models/bank.statement';
+import { FileExtension } from '../../../shared/models/file.extension';
+import { BankStatementUploadService } from './service/bank-statement-upload.service';
 import { dateRangeCustomValidator } from './validation/date.range.custom.validator';
 import { verifyMaximumPeriod } from './validation/verify.maximum.period';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { Bank } from '../../shared/models/bank';
+import { Bank } from '../../../shared/models/bank';
 
 @Component({
-  templateUrl: './upload.component.html'
+  templateUrl: './bank-statement-upload.component.html'
 })
-export class UploadComponent implements OnInit {
+export class BankStatementUploadComponent implements OnInit {
 
   files: File[] = [];
   previews: string[] = [];
@@ -33,7 +33,7 @@ export class UploadComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private uploadService: UploadService,
+    private uploadService: BankStatementUploadService,
     private router: Router
   ) { }
 
@@ -66,6 +66,7 @@ export class UploadComponent implements OnInit {
         this.router.navigate(['/wallet/entries', this.accountToRedirect]);
       }))
       .subscribe(r => {
+        console.log(r);
         const status = r.status;
         if (status === 200) {
           this.accountToRedirect = r.body;
