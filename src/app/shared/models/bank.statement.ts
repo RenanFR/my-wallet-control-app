@@ -4,6 +4,8 @@ import { Bank } from './bank';
 
 export class BankStatement {
 	
+	_id: string;
+
 	account: string;
 
 	periodStart: string;
@@ -11,6 +13,10 @@ export class BankStatement {
 	periodEnd: string;
 
 	fileExtension: FileExtension;
+
+	fileName: string;
+
+	originalFileName: string;
 
 	columnDate: string;
 
@@ -23,7 +29,11 @@ export class BankStatement {
 	entries: BankStatementEntry[ ];
 
 	preSignedURL: string;
-
+	
 	bank: Bank;
+
+	uploadedAt: string;
+
+	status: string;
 
 }

@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
 import { BankStatementUploadComponent } from './bank-statement/upload/bank-statement-upload.component';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
+import { BankStatementListComponent } from './bank-statement-list/bank-statement-list.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    data: {
+    data: { 
       title: 'Wallet'
     },
     children: [
@@ -17,10 +18,17 @@ const routes: Routes = [
         redirectTo: 'upload'
       },
       {
-        path: 'entries/:account',
+        path: 'entries/:objectId',
         component: BankStatementEntriesComponent,
         data: {
           title: 'Bank statement entries'
+        }
+      },
+      {
+        path: 'uploads/:account',
+        component: BankStatementListComponent,
+        data: {
+          title: 'Uploads'
         }
       },
       {

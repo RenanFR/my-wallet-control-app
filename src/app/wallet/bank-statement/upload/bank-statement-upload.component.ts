@@ -63,7 +63,7 @@ export class BankStatementUploadComponent implements OnInit {
     this.uploadService
       .upload(statementUploadDTO, this.files[0])
       .pipe(finalize(() => {
-        this.router.navigate(['/wallet/entries', this.accountToRedirect]);
+        this.router.navigate(['/wallet/uploads', this.accountToRedirect]);
       }))
       .subscribe(r => {
         console.log(r);

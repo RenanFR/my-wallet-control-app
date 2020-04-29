@@ -10,12 +10,14 @@ import { BankStatementUploadService } from './bank-statement/upload/service/bank
 import { SharedModule } from '../shared/shared.module';
 import { BankStatementEntriesService } from './bank-statement/entries/service/bank-statement-entries.service';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
+import { BankStatementListComponent } from './bank-statement-list/bank-statement-list.component';
 
 @NgModule({
   declarations: [
     BankStatementEntriesComponent,
     BankStatementUploadComponent,
-    FinancialDashboardComponent
+    FinancialDashboardComponent,
+    BankStatementListComponent
   ],
   imports: [
     CommonModule,

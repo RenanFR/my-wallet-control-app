@@ -16,8 +16,9 @@ export class BankStatementEntriesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let account = this.route.snapshot.params.account;
-    this.bankStatementEntriesService.getByAccount(account)
+    let uploadId = this.route.snapshot.params.objectId;
+    this.bankStatementEntriesService
+        .getByUpload(uploadId)
         .subscribe(response => {
           this.bankStatement = response;
         });

@@ -11,10 +11,16 @@ export class BankStatementEntriesService {
 
   constructor(private http: HttpClient) { }
 
-  public getByAccount(account: string): Observable<BankStatement> {
+  public getByAccount(account: string): Observable<BankStatement[]> {
     return this
       .http
-      .get<BankStatement>(`${base}/${account}`);  
+      .get<BankStatement[]>(`${base}/${account}`);  
+  }  
+
+  public getByUpload(uploadId: string): Observable<BankStatement> {
+    return this
+      .http
+      .get<BankStatement>(`${base}/upload/${uploadId}`);  
   }  
   
 }
