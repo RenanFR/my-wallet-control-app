@@ -66,7 +66,6 @@ export class BankStatementUploadComponent implements OnInit {
         this.router.navigate(['/wallet/uploads', this.accountToRedirect]);
       }))
       .subscribe(r => {
-        console.log(r);
         const status = r.status;
         if (status === 200) {
           this.accountToRedirect = r.body;

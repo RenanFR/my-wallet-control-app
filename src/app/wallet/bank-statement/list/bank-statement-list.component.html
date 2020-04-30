@@ -19,14 +19,22 @@
             </thead>
             <tbody>
               <tr *ngFor="let statement of bankStatements">
-                <td>{{statement._id}}</td>
+                <td>
+                  <a *ngIf="statement.status === 'SUCCEEDED'" [routerLink]="['/wallet/entries', statement._id]">{{statement._id}}</a>
+                  <b *ngIf="statement.status !== 'SUCCEEDED'">{{statement._id}}</b>
+                </td>
                 <td>{{statement.uploadedAt}}</td>
                 <td>{{statement.fileName}}</td>
                 <td>{{statement.bank}}</td>
                 <td>{{statement.periodStart}}</td>
                 <td>{{statement.periodEnd}}</td>
                 <td>
-                  <span class="badge badge-success">{{statement.status}}</span>
+                  <span [ngClass]="{'badge': true, 
+                  'badge-danger': statement.status === 'FAILED', 
+                  'badge-success': statement.status === 'SUCCEEDED', 
+                  'badge-warning': statement.status === 'IN_PROGRESS'}">
+                    {{statement.status}}
+                  </span>
                 </td>
               </tr>
             </tbody>

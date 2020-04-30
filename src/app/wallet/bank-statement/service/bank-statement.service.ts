@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
-import { BankStatement } from '../../../../shared/models/bank.statement';
+import { environment } from '../../../../environments/environment';
+import { BankStatement } from '../../../shared/models/bank.statement';
 
-const base: string = `${environment.SERVER_URL}/financial`;
+const base: string = `${environment.SERVER_URL}/statements`;
 
 @Injectable()
-export class BankStatementEntriesService {
+export class BankStatementService {
 
   constructor(private http: HttpClient) { }
 

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
+import { BankStatementListComponent } from './bank-statement/list/bank-statement-list.component';
 import { BankStatementUploadComponent } from './bank-statement/upload/bank-statement-upload.component';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
-import { BankStatementListComponent } from './bank-statement-list/bank-statement-list.component';
 
 
 const routes: Routes = [
