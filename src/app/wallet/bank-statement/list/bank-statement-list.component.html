@@ -33,7 +33,7 @@
                   'badge-danger': statement.status === 'FAILED', 
                   'badge-success': statement.status === 'SUCCEEDED', 
                   'badge-warning': statement.status === 'IN_PROGRESS'}">
-                    {{statement.status}}
+                    {{getProcessingStatus(statement.status)}}
                   </span>
                 </td>
               </tr>

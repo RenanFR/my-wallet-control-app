@@ -50,7 +50,6 @@ export class WebSocketAPI {
     }
     
     private handleReceived(message): void {
-        console.log('MESSAGE RECEIVED ' + message);
         const _this = this;
         const status = JSON.parse(message.body) as BankStatementProcessingStatus;
         _this.bankStatementListComponent.changeStatus(status);

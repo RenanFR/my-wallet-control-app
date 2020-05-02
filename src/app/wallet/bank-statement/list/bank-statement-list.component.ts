@@ -35,7 +35,6 @@ export class BankStatementListComponent implements OnInit, OnDestroy {
   }  
 
   changeStatus(bankStatementProcessingStatus: BankStatementProcessingStatus): void {
-    console.log(bankStatementProcessingStatus);
     this.bankStatements
       .filter(b => b._id === bankStatementProcessingStatus.statementId)
       .forEach(b => b.status = bankStatementProcessingStatus.status);
@@ -43,6 +42,16 @@ export class BankStatementListComponent implements OnInit, OnDestroy {
 
   private connect(account: string): void {
     this.webSocketAPI.connect(account);
+  }  
+
+  getProcessingStatus(status: string): string {
+    if (status === 'FAILED') {
+      return 'FALHA NO PROCESSAMENTO';
+    } else if (status === 'SUCCEEDED') {
+      return 'PROCESSADO COM SUCESSO';
+    } else {
+      return 'PROCESSAMENTO EM ANDAMENTO';
+    }
   }  
 
 }
