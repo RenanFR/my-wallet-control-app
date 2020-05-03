@@ -11,13 +11,16 @@ import { BankStatementUploadComponent } from './bank-statement/upload/bank-state
 import { BankStatementUploadService } from './bank-statement/upload/service/bank-statement-upload.service';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
 import { WalletRoutingModule } from './wallet-routing.module';
+import { ExpenseCategoryComponent } from './expense-category/expense-category.component';
+import { ExpenseCategoryService } from './expense-category/service/expense-category.service';
 
 @NgModule({
   declarations: [
     BankStatementEntriesComponent,
     BankStatementUploadComponent,
     FinancialDashboardComponent,
-    BankStatementListComponent
+    BankStatementListComponent,
+    ExpenseCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { WalletRoutingModule } from './wallet-routing.module';
   ],
   providers: [
     BankStatementUploadService,
-    BankStatementService
+    BankStatementService,
+    ExpenseCategoryService
   ]
 })
 export class WalletModule { }

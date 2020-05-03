@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
+import { ExpenseCategoryComponent } from './expense-category/expense-category.component';
 import { BankStatementListComponent } from './bank-statement/list/bank-statement-list.component';
 import { BankStatementUploadComponent } from './bank-statement/upload/bank-statement-upload.component';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
@@ -36,6 +37,13 @@ const routes: Routes = [
         component: FinancialDashboardComponent,
         data: {
           title: 'Financial Dashboard'
+        }
+      },
+      {
+        path: 'expenses/categories/:account',
+        component: ExpenseCategoryComponent,
+        data: {
+          title: 'Expense categories'
         }
       },
       {
