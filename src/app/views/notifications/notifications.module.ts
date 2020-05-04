@@ -26,6 +26,10 @@ import { NotificationsRoutingModule } from './notifications-routing.module';
     AlertsComponent,
     BadgesComponent,
     ModalsComponent
+  ],
+  exports: [
+    AlertModule,
+    ModalModule
   ]
 })
 export class NotificationsModule { }

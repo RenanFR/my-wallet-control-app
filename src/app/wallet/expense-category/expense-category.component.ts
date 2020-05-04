@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ExpenseCategory } from '../../shared/models/expense-category';
 import { ExpenseCategoryService } from './service/expense-category.service';
 
@@ -12,12 +13,15 @@ export class ExpenseCategoryComponent implements OnInit {
   accountCategories: ExpenseCategory[];
   categoriesToSee: ExpenseCategory[];
   detailingCategory: ExpenseCategory;
+  
+  @ViewChild('addNewModal') public addNewModal: ModalDirective;
+  @ViewChild('newCategory') public newCategory: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
     private expenseCategoryService: ExpenseCategoryService
   ) { }
-
+  
   ngOnInit(): void {
     this.accountId = this.route.snapshot.params.account;    
     this.detailingCategory = null;
@@ -38,7 +42,7 @@ export class ExpenseCategoryComponent implements OnInit {
     this.detailingCategory = category;
   }    
   
-  returnRootLevel(): void {
+  private returnRootLevel(): void {
     this.detailingCategory = null;
     this.categoriesToSee = this.accountCategories.filter(cat => cat.level === 1);
   } 
@@ -54,6 +58,22 @@ export class ExpenseCategoryComponent implements OnInit {
             this.categoriesToSee = this.accountCategories.filter(cat => response.id === cat.id)[0].childrenCategories;
           }
         });
+  } 
+
+  addNew(): void {
+    let parentCategory: ExpenseCategory;
+    if (this.detailingCategory === null) {
+      parentCategory = new ExpenseCategory();
+      parentCategory.account = this.accountId;
+    } else {
+      parentCategory = this.detailingCategory;
+    }
+    this.expenseCategoryService
+      .addNew(parentCategory, this.newCategory.nativeElement.value)
+      .subscribe(response => {
+            this.ngOnInit();
+            this.addNewModal.hide();
+      });    
   } 
 
 }

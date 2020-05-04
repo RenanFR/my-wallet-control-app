@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -22,6 +22,16 @@ export class ExpenseCategoryService {
     return this
       .http
       .get<ExpenseCategory>(`${base}/parent/${category.name}`);  
+  }  
+
+  public addNew(parentCategory: ExpenseCategory, childrenCategory: string): Observable<ExpenseCategory> {
+    let body = new HttpParams()
+        .set('account', parentCategory.account)
+        .set('parentCategory', parentCategory.name)
+        .set('childrenCategory', childrenCategory);
+    return this
+      .http
+      .post<ExpenseCategory>(`${base}/${parentCategory.account}`, body);  
   }  
   
 }

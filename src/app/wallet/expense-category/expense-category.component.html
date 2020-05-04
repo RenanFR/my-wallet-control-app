@@ -10,7 +10,11 @@
                   <i class="fa fa-arrow-circle-left"></i>&nbsp;VOLTAR
           </button>
           <i class="fa fa-align-justify"></i> CATEGORIAS DE DESPESA
-        </div>
+          <button (click)="addNewModal.show()"
+                  type="button" 
+                  class="btn btn-pill btn-success">
+                  <i class="fa fa-plus-square"></i>&nbsp;ADICIONAR
+          </button>
         <div class="card-body">
           <table class="table">
             <thead>
@@ -21,27 +25,23 @@
             </thead>
             <tbody>
               <tr *ngFor="let cat of categoriesToSee">
-                <td>
-                  <button *ngIf="hasChildrenCategories(cat); else lastLevel" 
-                          (click)="changeLevel(cat)"
-                          type="button" 
-                          class="btn btn-block btn-outline-light active" 
-                          aria-pressed="true">
-                          {{cat.name}}
-                  </button>
-                  <ng-template #lastLevel>
-                    {{cat.name}}
-                  </ng-template>                  
-                </td>
-                <td>
-                  <div *ngIf="hasChildrenCategories(cat); else noChildren">
-                    {{cat.childrenCategories.length}}
-                  </div>  
-                  <ng-template #noChildren>
-                    0
-                  </ng-template>  
-                </td>
-              </tr>
+                  <td>
+                    <button (click)="changeLevel(cat)"
+                            type="button" 
+                            class="btn btn-block btn-outline-light active" 
+                            aria-pressed="true">
+                            {{cat.name}}
+                    </button>
+                  </td>
+                  <td>
+                    <div *ngIf="hasChildrenCategories(cat); else noChildren">
+                      {{cat.childrenCategories.length}}
+                    </div>  
+                    <ng-template #noChildren>
+                      0
+                    </ng-template>  
+                  </td>
+                </tr>
             </tbody>
           </table>
           <ul class="pagination">
@@ -61,3 +61,28 @@
   </div>
   <!--/.row-->
 </div>
+<div bsModal #addNewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">ADICIONAR NOVA CATEGORIA</h4>
+        <button type="button" class="close" (click)="addNewModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-md-12">
+            <div class="input-group">
+              <input #newCategory type="text" id="newCategory" name="newCategory" class="form-control" placeholder="NOME DA CATEGORIA">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="addNewModal.hide()">CANCELAR</button>
+        <button type="button" class="btn btn-info" (click)="addNew()">SALVAR NOVA</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
