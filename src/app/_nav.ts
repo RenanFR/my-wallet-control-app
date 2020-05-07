@@ -12,6 +12,25 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'CARTEIRA'
+  },
+  {
+    name: 'UPLOAD DE EXTRATO',
+    url: '/wallet/upload',
+    icon: 'icon-cloud-upload'
+  },
+  {
+    name: 'HISTÓRICO BANCÁRIO',
+    url: '/wallet/uploads/421129-4',
+    icon: 'icon-calendar'
+  },
+  {
+    name: 'CATEGORIAS DE DESPESA',
+    url: '/wallet/expenses/categories/421129-4',
+    icon: 'icon-tag'
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {

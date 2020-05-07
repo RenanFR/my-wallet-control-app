@@ -18,10 +18,12 @@ export class ExpenseCategoryService {
       .get<ExpenseCategory[]>(`${base}/${account}`);  
   }  
 
-  public getParentCategory(category: ExpenseCategory): Observable<ExpenseCategory> {
+  public getParentCategory(category: ExpenseCategory, account: string): Observable<ExpenseCategory> {
+    let requestParam = new HttpParams()
+        .set('account', account);    
     return this
       .http
-      .get<ExpenseCategory>(`${base}/parent/${category.name}`);  
+      .get<ExpenseCategory>(`${base}/parent/${category.name}`, {params: requestParam});  
   }  
 
   public addNew(parentCategory: ExpenseCategory, childrenCategory: string): Observable<ExpenseCategory> {

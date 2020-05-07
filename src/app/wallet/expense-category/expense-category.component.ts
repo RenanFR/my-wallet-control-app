@@ -49,7 +49,7 @@ export class ExpenseCategoryComponent implements OnInit {
 
   findParentCategoryOf(category: ExpenseCategory): void {
     this.expenseCategoryService
-        .getParentCategory(category)
+        .getParentCategory(category, this.accountId)
         .subscribe(response => {
           this.detailingCategory = response;
           if (response === null) {
