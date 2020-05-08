@@ -85,6 +85,10 @@ export const routes: Routes = [
       {
         path: 'wallet',
         loadChildren: () => import('./wallet/wallet.module').then(m => m.WalletModule)
+      },
+      {
+        path: 'investments',
+        loadChildren: () => import('./investments/investments.module').then(m => m.InvestmentsModule)
       }
     ]
   },

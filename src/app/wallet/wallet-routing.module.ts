@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: '',
     data: { 
-      title: 'Wallet'
+      title: 'CARTEIRA'
     },
     children: [
       {
@@ -22,35 +22,35 @@ const routes: Routes = [
         path: 'entries/:objectId',
         component: BankStatementEntriesComponent,
         data: {
-          title: 'Bank statement entries'
+          title: 'MOVIMENTAÇÃO DO EXTRATO BANCÁRIO'
         }
       },
       {
         path: 'uploads/:account',
         component: BankStatementListComponent,
         data: {
-          title: 'Uploads'
+          title: 'UPLOADS'
         }
       },
       {
         path: 'dashboard/:account',
         component: FinancialDashboardComponent,
         data: {
-          title: 'Financial Dashboard'
+          title: 'DASHBOARD FINANCEIRO'
         }
       },
       {
         path: 'expenses/categories/:account',
         component: ExpenseCategoryComponent,
         data: {
-          title: 'Expense categories'
+          title: 'CATEGORIAS DE DESPESA'
         }
       },
       {
         path: 'upload',
         component: BankStatementUploadComponent,
         data: {
-          title: 'Upload Bank Statement'
+          title: 'UPLOAD DO EXTRATO BANCÁRIO'
         }
       }
     ]

@@ -31,6 +31,20 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'MEUS INVESTIMENTOS'
+  },
+  {
+    name: 'ALOCAÇÃO ATUAL DE AÇÕES',
+    url: '/investments/allocation/421129-4',
+    icon: 'icon-pie-chart'
+  },
+  {
+    name: 'PLANEJAMENTO DE ALOCAÇÃO DE AÇÕES',
+    url: '/investments/planning/421129-4',
+    icon: 'icon-chart'
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {
