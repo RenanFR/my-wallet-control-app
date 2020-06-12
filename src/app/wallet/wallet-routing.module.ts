@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
-import { ExpenseCategoryComponent } from './expense-category/expense-category.component';
 import { BankStatementListComponent } from './bank-statement/list/bank-statement-list.component';
 import { BankStatementUploadComponent } from './bank-statement/upload/bank-statement-upload.component';
+import { ExpenseCategoryComponent } from './expense-category/expense-category.component';
 import { FinancialDashboardComponent } from './financial-dashboard/financial-dashboard.component';
 
 

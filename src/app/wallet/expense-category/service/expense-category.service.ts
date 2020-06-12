@@ -11,15 +11,14 @@ export class ExpenseCategoryService {
 
   constructor(private http: HttpClient) { }
 
-  public getByAccount(account: string): Observable<ExpenseCategory[]> {
+  public getByAccount(): Observable<ExpenseCategory[]> {
     return this
       .http
-      .get<ExpenseCategory[]>(`${base}/${account}`);  
+      .get<ExpenseCategory[]>(`${base}`);  
   }  
 
-  public getParentCategory(category: ExpenseCategory, account: string): Observable<ExpenseCategory> {
-    let requestParam = new HttpParams()
-        .set('account', account);    
+  public getParentCategory(category: ExpenseCategory): Observable<ExpenseCategory> {
+    let requestParam = new HttpParams();    
     return this
       .http
       .get<ExpenseCategory>(`${base}/parent/${category.name}`, {params: requestParam});  
@@ -27,12 +26,11 @@ export class ExpenseCategoryService {
 
   public addNew(parentCategory: ExpenseCategory, childrenCategory: string): Observable<ExpenseCategory> {
     let body = new HttpParams()
-        .set('account', parentCategory.account)
         .set('parentCategory', parentCategory.name)
         .set('childrenCategory', childrenCategory);
     return this
       .http
-      .post<ExpenseCategory>(`${base}/${parentCategory.account}`, body);  
+      .post<ExpenseCategory>(`${base}`, body);  
   }  
   
 }

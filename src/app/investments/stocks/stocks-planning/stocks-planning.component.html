@@ -1,1 +1,86 @@
-<p>stocks-planning works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> MEU PLANEJAMENTO DE EXPOSIÇÃO A AÇÕES
+            <button (click)="addNewModal.show()"
+                    type="button" 
+                    class="btn btn-pill btn-success">
+                    <i class="fa fa-plus-square"></i>&nbsp;ADICIONAR
+            </button>
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>SETOR</th>
+                  <th>OBJETIVO SETOR</th>
+                  <th>OBJETIVO ALOCAÇÃO SETOR</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sap of stocksAllocationPlanned">
+                  <td>{{sap.sectorName}}</td>
+                  <td>{{sap.allocationPercentageGoal}}</td>
+                  <td>{{sap.allocationValueGoal}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+  <div bsModal #addNewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">ADICIONAR PORCENTAGEM DE ALOCAÇÃO POR SETOR</h4>
+          <button type="button" class="close" (click)="addNewModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="sector-name">SETOR</label>
+            <div class="col-md-9">
+              <input [(ngModel)]="newStocksAllocationPlan.sectorName" 
+                    type="text" 
+                    id="sector-name" 
+                    name="sector-name" 
+                    class="form-control" 
+                    placeholder="NOME DO SETOR">            
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="allocation-percentage-goal">PORCENTAGEM DE ALOCAÇÃO</label>
+            <div class="col-md-9">
+              <input [(ngModel)]="newStocksAllocationPlan.allocationPercentageGoal" 
+                  type="number" 
+                  id="allocation-percentage-goal" 
+                  name="allocation-percentage-goal" 
+                  class="form-control" 
+                  min="1" max="100">              
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="addNewModal.hide()">CANCELAR</button>
+          <button type="button" class="btn btn-info" (click)="addNewStocksAllocationBySector()">SALVAR NOVA</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  

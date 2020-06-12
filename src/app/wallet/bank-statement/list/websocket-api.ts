@@ -7,7 +7,7 @@ export class WebSocketAPI {
 
     wsEndpoint: string = 'http://localhost:8080/wallet/walletws';
 
-    messageTopic: string = '/topic/statements/account/*';
+    messageTopic: string = '/topic/statements/user/*';
 
     stompClient: any;
 

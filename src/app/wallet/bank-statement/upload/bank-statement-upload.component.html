@@ -19,16 +19,16 @@
                             <span class="input-group-text"><i class="fa fa-university"></i></span>
                           </div>
                           <input 
-                              formControlName="account" 
+                              formControlName="userId" 
                               type="text" 
-                              id="account" 
-                              name="account" 
+                              id="user-id" 
+                              name="user-id" 
                               class="form-control" 
                               placeholder="CONTA">
                         </div>
                         <wallet-error 
-                        *ngIf="(bankStatementForm.get('account').errors?.required 
-                              && bankStatementForm.get('account').touched)" 
+                        *ngIf="(bankStatementForm.get('userId').errors?.required 
+                              && bankStatementForm.get('userId').touched)" 
                         errorMessage="O NÚMERO DA CONTA É OBRIGATÓRIO">
                         </wallet-error>                          
                       </div>                      
@@ -73,7 +73,7 @@
                               <input formControlName="fileExtension" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="fileExtension" 
+                                    name="file-extension" 
                                     id="rdo-pdf" 
                                     [value]="extensions.PDF" 
                                     (change)="enableControlAndExtension(extensions.PDF)">
@@ -83,7 +83,7 @@
                               <input formControlName="fileExtension" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="fileExtension" 
+                                    name="file-extension" 
                                     id="rdo-csv" 
                                     [value]="extensions.CSV" 
                                     (change)="enableControlAndExtension(extensions.CSV)">
@@ -93,7 +93,7 @@
                               <input formControlName="fileExtension" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="fileExtension" 
+                                    name="file-extension" 
                                     id="rdo-XLSX " 
                                     [value]="extensions.XLSX" 
                                     (change)="enableControlAndExtension(extensions.XLSX)">

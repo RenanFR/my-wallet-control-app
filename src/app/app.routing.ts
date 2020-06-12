@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
-
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { isLoggedGuard } from './shared/global/is.logged.guard';
+
+
 
 export const routes: Routes = [
   {
@@ -49,6 +50,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [ isLoggedGuard ],
     children: [
       {
         path: 'base',

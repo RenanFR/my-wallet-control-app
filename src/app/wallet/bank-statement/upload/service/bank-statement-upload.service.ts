@@ -13,7 +13,7 @@ export class BankStatementUploadService {
 
   public upload(statementUploadDTO: BankStatement, file: File): Observable<any> {
     const form = new FormData();
-    form.append('account', statementUploadDTO.account);
+    form.append('userId', statementUploadDTO.userId);
     form.append('periodStart', statementUploadDTO.periodStart);
     form.append('periodEnd', statementUploadDTO.periodEnd);
     form.append('fileExtension', statementUploadDTO.fileExtension);

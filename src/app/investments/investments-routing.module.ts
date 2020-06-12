@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { StocksPlanningComponent } from './stocks/stocks-planning/stocks-planning.component';
+import { RouterModule, Routes } from '@angular/router';
 import { StocksAllocationComponent } from './stocks/stocks-allocation/stocks-allocation.component';
+import { StocksPlanningComponent } from './stocks/stocks-planning/stocks-planning.component';
+import { InvestmentsComponent } from './applications/investments.component';
 
 
 const routes: Routes = [
@@ -16,17 +17,24 @@ const routes: Routes = [
         redirectTo: 'allocation/421129-4'
       },
       {
-        path: 'allocation/:accountId',
+        path: 'allocation',
         component: StocksAllocationComponent,
         data: {
           title: 'ALOCAÇÃO ATUAL DE AÇÕES'
         }
       },
       {
-        path: 'planning/:accountId',
+        path: 'planning',
         component: StocksPlanningComponent,
         data: {
           title: 'PLANEJAMENTO DE ALOCAÇÃO DE AÇÕES'
+        }
+      },
+      {
+        path: 'my',
+        component: InvestmentsComponent,
+        data: {
+          title: 'MINHAS APLICAÇÕES FINANCEIRAS'
         }
       }
     ]

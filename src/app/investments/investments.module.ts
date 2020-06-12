@@ -1,28 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { NotificationsModule } from '../views/notifications/notifications.module';
+import { InvestmentsComponent } from './applications/investments.component';
 import { InvestmentsRoutingModule } from './investments-routing.module';
 import { StocksAllocationComponent } from './stocks/stocks-allocation/stocks-allocation.component';
 import { StocksPlanningComponent } from './stocks/stocks-planning/stocks-planning.component';
 import { StocksService } from './stocks/stocks.service';
+import { InvestmentsService } from './investments.service';
 
 
 
 @NgModule({
   declarations: [
     StocksPlanningComponent,
-    StocksAllocationComponent    
+    StocksAllocationComponent,
+    InvestmentsComponent    
   ],
   imports: [
     CommonModule,
     SharedModule,
-    HttpClientModule,
-    InvestmentsRoutingModule
+    InvestmentsRoutingModule,
+    NotificationsModule,
+    FormsModule
 
   ],
   providers: [
-    StocksService
+    StocksService,
+    InvestmentsService
   ]
 })
 export class InvestmentsModule { }

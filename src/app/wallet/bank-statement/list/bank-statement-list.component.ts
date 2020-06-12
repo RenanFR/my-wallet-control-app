@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BankStatementService } from '../service/bank-statement.service';
-import { ActivatedRoute } from '@angular/router';
-import { BankStatement } from '../../../shared/models/bank.statement';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BankStatementProcessingStatus } from '../../../shared/models/bank-statement-processing-status';
+import { BankStatement } from '../../../shared/models/bank.statement';
+import { TokenService } from '../../../shared/service/token.service';
+import { BankStatementService } from '../service/bank-statement.service';
 import { WebSocketAPI } from './websocket-api';
 
 @Component({
@@ -12,21 +12,19 @@ export class BankStatementListComponent implements OnInit, OnDestroy {
 
   bankStatements: BankStatement[];
   webSocketAPI: WebSocketAPI;
-  accountId: string;
 
   constructor(
-    private route: ActivatedRoute,
+    private tokenService: TokenService,
     private bankStatementEntriesService: BankStatementService
   ) { }
 
   ngOnInit(): void {
-    this.accountId = this.route.snapshot.params.account;
     this.webSocketAPI = new WebSocketAPI(this);
     this.bankStatementEntriesService
-        .getByAccount(this.accountId)
+        .getByAccount()
         .subscribe(response => {
           this.bankStatements = response;
-          this.connect(this.accountId);
+          this.connect(this.tokenService.getUserId());
         });
   }
 

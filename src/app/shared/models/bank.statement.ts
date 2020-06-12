@@ -6,7 +6,7 @@ export class BankStatement {
 	
 	_id: string;
 
-	account: string;
+	userId: string;
 
 	periodStart: string;
 

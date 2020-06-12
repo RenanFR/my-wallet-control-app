@@ -4,7 +4,7 @@ export class ExpenseCategory {
 
     name: string;
 
-    account: string;
+    user: string;
 
     level: number;
 

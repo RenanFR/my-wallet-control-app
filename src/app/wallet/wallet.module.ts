@@ -27,11 +27,10 @@ import { WalletRoutingModule } from './wallet-routing.module';
     CommonModule,
     WalletRoutingModule,
     SharedModule,
-    HttpClientModule,
     MatProgressBarModule,
+    NotificationsModule,
     ReactiveFormsModule,
-    FormsModule,
-    NotificationsModule
+    FormsModule
   ],
   providers: [
     BankStatementUploadService,

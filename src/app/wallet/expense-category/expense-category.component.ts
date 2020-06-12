@@ -9,8 +9,7 @@ import { ExpenseCategoryService } from './service/expense-category.service';
 })
 export class ExpenseCategoryComponent implements OnInit {
 
-  accountId: string;
-  accountCategories: ExpenseCategory[];
+  userCategories: ExpenseCategory[];
   categoriesToSee: ExpenseCategory[];
   detailingCategory: ExpenseCategory;
   
@@ -23,13 +22,12 @@ export class ExpenseCategoryComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
-    this.accountId = this.route.snapshot.params.account;    
     this.detailingCategory = null;
     this.expenseCategoryService
-        .getByAccount(this.accountId)
+        .getByAccount()
         .subscribe(response => {
-          this.accountCategories = response;
-          this.categoriesToSee = this.accountCategories.filter(cat => cat.level === 1);
+          this.userCategories = response;
+          this.categoriesToSee = this.userCategories.filter(cat => cat.level === 1);
         });    
   }
 
@@ -44,18 +42,18 @@ export class ExpenseCategoryComponent implements OnInit {
   
   private returnRootLevel(): void {
     this.detailingCategory = null;
-    this.categoriesToSee = this.accountCategories.filter(cat => cat.level === 1);
+    this.categoriesToSee = this.userCategories.filter(cat => cat.level === 1);
   } 
 
   findParentCategoryOf(category: ExpenseCategory): void {
     this.expenseCategoryService
-        .getParentCategory(category, this.accountId)
+        .getParentCategory(category)
         .subscribe(response => {
           this.detailingCategory = response;
           if (response === null) {
             this.returnRootLevel();
           } else {
-            this.categoriesToSee = this.accountCategories.filter(cat => response.id === cat.id)[0].childrenCategories;
+            this.categoriesToSee = this.userCategories.filter(cat => response.id === cat.id)[0].childrenCategories;
           }
         });
   } 
@@ -64,7 +62,6 @@ export class ExpenseCategoryComponent implements OnInit {
     let parentCategory: ExpenseCategory;
     if (this.detailingCategory === null) {
       parentCategory = new ExpenseCategory();
-      parentCategory.account = this.accountId;
     } else {
       parentCategory = this.detailingCategory;
     }

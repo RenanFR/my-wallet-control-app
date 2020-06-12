@@ -21,12 +21,12 @@ export const navItems: INavData[] = [
   },
   {
     name: 'HISTÓRICO BANCÁRIO',
-    url: '/wallet/uploads/421129-4',
+    url: '/wallet/uploads',
     icon: 'icon-calendar'
   },
   {
     name: 'CATEGORIAS DE DESPESA',
-    url: '/wallet/expenses/categories/421129-4',
+    url: '/wallet/expenses/categories',
     icon: 'icon-tag'
   },
   {
@@ -35,13 +35,18 @@ export const navItems: INavData[] = [
   },
   {
     name: 'ALOCAÇÃO ATUAL DE AÇÕES',
-    url: '/investments/allocation/421129-4',
+    url: '/investments/allocation',
     icon: 'icon-pie-chart'
   },
   {
     name: 'PLANEJAMENTO DE ALOCAÇÃO DE AÇÕES',
-    url: '/investments/planning/421129-4',
+    url: '/investments/planning',
     icon: 'icon-chart'
+  },
+  {
+    name: 'MEUS INVESTIMENTOS',
+    url: '/investments/my',
+    icon: 'icon-graph'
   },
   {
     title: true,
