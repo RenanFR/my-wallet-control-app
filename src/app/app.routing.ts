@@ -34,21 +34,21 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: {
-      title: 'Login Page'
+      title: 'AUTENTICAÇÃO'
     }
   },
   {
     path: 'register',
     component: RegisterComponent,
     data: {
-      title: 'Register Page'
+      title: 'CRIAÇÃO DE CONTA'
     }
   },
   {
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'DASHBOARD FINANCEIRO'
     },
     canActivate: [ isLoggedGuard ],
     children: [

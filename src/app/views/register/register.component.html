@@ -45,47 +45,14 @@
                 <tab>
                   <ng-template tabHeading><i class="icon-wallet"></i> DADOS FINANCEIROS &nbsp;</ng-template>
 
-                  <div class="input-group mb-4" id="switchBroker">
-                    <label class="switch switch-pill switch-warning">
-                      <input type="checkbox" class="switch-input"  [checked]="isBrokerEnabled" (click)="enableOrDisableBroker()">
-                      <span class="switch-slider"></span>
-                    </label>
-                    <div class="col-md-9">
-                      <p class="form-control-static">ADICIONAR CONTA EASYNVEST</p>
-                    </div>
-                  </div>                  
-
-                  <div class="input-group mb-4" *ngIf="isBrokerEnabled">
-                    <div class="input-group-prepend">
-                      <i class="icon-easynvest"></i>
-                    </div>
-                    <input [(ngModel)]="login.easynvestPassword" id="easynvestPassword" name="easynvestPassword" type="password" class="form-control" placeholder="SENHA EASYNVEST" autocomplete="new-password" required>
-                  </div> 
-
-                  <div class="input-group mb-4" id="switchBitcoin">
-                    <label class="switch switch-pill switch-warning">
-                      <input type="checkbox" class="switch-input"  [checked]="hasBitcoin" (click)="enableOrDisableBitcoin()">
-                      <span class="switch-slider"></span>
-                    </label>
-                    <div class="col-md-9">
-                      <p class="form-control-static">ADICIONAR SALDO EM BITCOIN</p>
-                    </div>
-                  </div>                   
-
-                  <div class="input-group mb-4" *ngIf="hasBitcoin">
-                    <div class="input-group-prepend">
-                      <i class="icon-bitcoin"></i>
-                    </div>
-                    <input [(ngModel)]="login.bitcoinBalance" id="bitcoinBalance" name="bitcoinBalance" type="text" class="form-control" placeholder="SALDO BITCOIN" autocomplete="new-password" required>
-                  </div> 
-
                   <div class="input-group mb-4">
                     <button (click)="addBankAccount()"
                       type="button" 
                       id="btnAddBank"
                       class="btn btn-pill btn-success">
                       <i class="fa fa-plus-square"></i>&nbsp;ADICIONAR CONTA BANCÁRIA
-                    </button>                  
+                    </button>     
+                                                   
                   </div>
 
                   <div class="form-group row" *ngIf="login.bankAccounts.length !== 0">
@@ -106,3 +73,74 @@
     </div>
   </main>
 </div>
+
+<div bsModal #modalBankAccount="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-success" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">INCLUSÃO DE CONTA BANCÁRIA</h4>
+        <button type="button" class="close" (click)="modalBank.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="bank">INDIQUE QUAL O SEU BANCO</label>
+          <div class="col-md-9">
+            <select 
+              [(ngModel)]="bank"
+              id="bank" 
+              name="bank" 
+              class="form-control form-control-sm">
+                <option value="Banco Inter"> BANCO INTER </option>
+                <option value="Caixa Econômica Federal"> CAIXA ECONÔMICA FEDERAL </option>
+                <option value="Banco Itaú"> BANCO ITAÚ </option>
+            </select>
+          </div>
+          <label class="col-md-3 col-form-label" for="account-number">NÚMERO DA CONTA</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="accountNumber" 
+                  type="text" 
+                  id="account-number" 
+                  name="account-number" 
+                  class="form-control" 
+                  placeholder="DIGITE O NÚMERO DA SUA CONTA">
+          </div>
+          <label class="col-md-3 col-form-label" for="agency">NÚMERO DA AGÊNCIA</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="agency" 
+                  type="text" 
+                  id="agency" 
+                  name="agency" 
+                  class="form-control" 
+                  placeholder="DIGITE O NÚMERO DA SUA AGÊNCIA">
+          </div>  
+          <label class="col-md-3 col-form-label" for="account-type">TIPO DE CONTA</label>
+          <div class="col-md-9">
+            <select 
+              [(ngModel)]="accountType"
+              id="account-type" 
+              name="account-type" 
+              class="form-control form-control-sm">
+                <option value="Corrente"> CORRENTE </option>
+                <option value="Poupança"> POUPANÇA </option>
+            </select>
+          </div>  
+          <label class="col-md-3 col-form-label" for="balance">SALDO ATUAL</label>
+          <div class="col-md-9">
+            <input [(ngModel)]="balance" 
+                type="number" 
+                step="any"
+                id="balance" 
+                name="balance" 
+                class="form-control">              
+          </div>                          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" name="btnHideModalBank" class="btn btn-secondary" (click)="modalBank.hide()">CANCELAR</button>
+        <button type="button" name="btnAddBank" class="btn btn-primary" (click)="addBank()">ADICIONAR</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  

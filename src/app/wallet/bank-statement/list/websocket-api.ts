@@ -20,7 +20,7 @@ export class WebSocketAPI {
     }
 
     public connect(accountTopic: string): void {
-        console.log('CONNECTING WITH WEB SOCKET')
+        console.log('CONECTANDO AO CANAL DE WEB SOCKET DA CONTA ' + accountTopic);
         let ws = new SockJS(this.wsEndpoint);
         this.stompClient = Stomp.over(ws);
         const _this = this;

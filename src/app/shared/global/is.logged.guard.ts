@@ -12,10 +12,11 @@ export class isLoggedGuard implements CanActivate {
     ){ }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+        console.log('VERIFICANDO A AUTENTICAÇÃO DO USUÁRIO');
         if (this.tokenService.isTokenSet()) {
             let token = this.tokenService.getToken();
             if (!!token) {
-                return true;
+                return this.tokenService.isTokenValid(this.tokenService.getTokenRaw());
             }
         } else {
             this.router.navigate(['/login']);

@@ -46,7 +46,7 @@ const APP_CONTAINERS = [
     FormsModule,
     ChartsModule,
     HttpClientModule,
-    SharedModule    
+    SharedModule
   ],
   declarations: [
     AppComponent,

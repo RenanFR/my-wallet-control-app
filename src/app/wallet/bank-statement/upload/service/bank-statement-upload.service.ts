@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
@@ -12,11 +12,14 @@ export class BankStatementUploadService {
   constructor(private http: HttpClient) { }
 
   public upload(statementUploadDTO: BankStatement, file: File): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders()
+          .append('Content-Type', 'multipart/form-data');
     const form = new FormData();
     form.append('userId', statementUploadDTO.userId);
     form.append('periodStart', statementUploadDTO.periodStart);
     form.append('periodEnd', statementUploadDTO.periodEnd);
     form.append('fileExtension', statementUploadDTO.fileExtension);
+    form.append('bankAccount', statementUploadDTO.bankAccount);
     form.append('bank', statementUploadDTO.bank);
     form.append('columnDate', statementUploadDTO.columnDate);
     form.append('columnDescription', statementUploadDTO.columnDescription);
@@ -30,7 +33,8 @@ export class BankStatementUploadService {
       {  
         reportProgress: true,  
         responseType: 'text',
-        observe: 'events'  
+        observe: 'events',
+        headers: headers
       });  
   }  
   

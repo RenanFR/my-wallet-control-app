@@ -12,6 +12,8 @@ export class BankStatement {
 
 	periodEnd: string;
 
+	bankAccount: string;
+
 	fileExtension: FileExtension;
 
 	fileName: string;

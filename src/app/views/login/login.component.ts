@@ -1,10 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Login } from '../../shared/models/login';
-import { AuthService } from '../../shared/service/auth.service';
 import { Router } from '@angular/router';
-import { TokenService } from '../../shared/service/token.service';
-import { switchMap, flatMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError, flatMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { Login } from '../../shared/models/login';
 import { OAuthToken } from '../../shared/models/token';
+import { AuthService } from '../../shared/service/auth.service';
+import { TokenService } from '../../shared/service/token.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,17 +24,21 @@ export class LoginComponent {
   ) { }
 
   authenticate(): void {
-    console.log('authenticate()');
+    console.log('ENVIOU O FORMULÁRIO DE AUTENTICAÇÃO');
     this.authService
         .getToken(this.login.userEmail, this.login.password)
         .pipe(flatMap((token: OAuthToken) => {
-          console.log(token);
           this.tokenService.storeToken(token);
           return this.authService.getUserInfo();
         }))
+        .pipe(catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            Swal.fire('Erro!', 'Não foi possível autenticar, verifique suas credenciais', 'error');
+          }
+          return throwError(error);
+        }))
         .subscribe((login: Login) => {
-          console.log(login);
-          // this.tokenService.storeLogin(login);
+          this.tokenService.storeLogin(login);
           this.router.navigateByUrl('/dashboard');
         });
   }

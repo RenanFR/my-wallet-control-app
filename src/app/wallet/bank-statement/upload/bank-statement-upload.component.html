@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                Upload de <strong>Extrato</strong> Bancário
+                UPLOAD DE <strong>EXTRATO</strong> BANCÁRIO
                 </div>
                 <div class="card-body">
                   <form 
@@ -13,25 +13,19 @@
                       class="form-horizontal" 
                       (submit)="onUpload()">
 
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-university"></i></span>
-                          </div>
-                          <input 
-                              formControlName="userId" 
-                              type="text" 
-                              id="user-id" 
-                              name="user-id" 
-                              class="form-control" 
-                              placeholder="CONTA">
+                      <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="account">CONTA BANCÁRIA</label>
+                        <div class="col-md-9">
+                          <select 
+                              formControlName="bankAccount" 
+                              id="bank-account" 
+                              name="bank-account" 
+                              class="form-control form-control-sm">
+                            <option *ngFor="let acc of login.bankAccounts" [value]="acc.accountNumber"> {{ acc.accountNumber }} </option>
+                          </select>
                         </div>
-                        <wallet-error 
-                        *ngIf="(bankStatementForm.get('userId').errors?.required 
-                              && bankStatementForm.get('userId').touched)" 
-                        errorMessage="O NÚMERO DA CONTA É OBRIGATÓRIO">
-                        </wallet-error>                          
                       </div>                      
+                   
                       <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="period-start">PERÍODO INICIAL</label>
                           <div class="col-md-9">
@@ -40,7 +34,6 @@
                                   class="form-control" 
                                   id="period-start" 
                                   type="date" 
-                                  name="period-start" 
                                   placeholder="date">
                             <wallet-error 
                               *ngIf="(bankStatementForm.get('periodStart').errors?.invalidDateRange 
@@ -52,7 +45,7 @@
                         <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="period-end">PERÍODO FINAL</label>
                           <div class="col-md-9">
-                            <input formControlName="periodEnd" class="form-control" id="period-end" type="date" name="period-end" placeholder="date">
+                            <input formControlName="periodEnd" class="form-control" id="period-end" type="date" placeholder="date">
                             <wallet-error 
                               *ngIf="(bankStatementForm.get('periodEnd').errors?.invalidDateRange 
                                     && bankStatementForm.get('periodEnd').touched)" 
@@ -73,7 +66,6 @@
                               <input formControlName="fileExtension" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="file-extension" 
                                     id="rdo-pdf" 
                                     [value]="extensions.PDF" 
                                     (change)="enableControlAndExtension(extensions.PDF)">
@@ -83,7 +75,6 @@
                               <input formControlName="fileExtension" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="file-extension" 
                                     id="rdo-csv" 
                                     [value]="extensions.CSV" 
                                     (change)="enableControlAndExtension(extensions.CSV)">
@@ -93,7 +84,6 @@
                               <input formControlName="fileExtension" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="file-extension" 
                                     id="rdo-XLSX " 
                                     [value]="extensions.XLSX" 
                                     (change)="enableControlAndExtension(extensions.XLSX)">
@@ -108,7 +98,6 @@
                               <input formControlName="bank" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="bank" 
                                     id="rdo-inter" 
                                     [value]="banks.INTER">
                               <label class="form-check-label" for="rdo-inter">Banco Inter</label>
@@ -117,7 +106,6 @@
                               <input formControlName="bank" 
                                     class="form-check-input" 
                                     type="radio" 
-                                    name="bank" 
                                     id="rdo-itau" 
                                     [value]="banks.ITAU">
                               <label class="form-check-label" for="rdo-itau">Banco Itaú</label>
@@ -131,7 +119,6 @@
                             <select 
                                 formControlName="columnDate" 
                                 id="column-date" 
-                                name="column-date" 
                                 class="form-control form-control-sm">
                               <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
                             </select>
@@ -143,7 +130,6 @@
                             <select 
                                 formControlName="columnDescription" 
                                 id="column-description" 
-                                name="column-description" 
                                 class="form-control form-control-sm">
                               <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
                             </select>
@@ -155,7 +141,6 @@
                             <select 
                                 formControlName="columnValue" 
                                 id="column-value" 
-                                name="column-value" 
                                 class="form-control form-control-sm">
                               <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
                             </select>
@@ -167,7 +152,6 @@
                             <select 
                                 formControlName="columnBalance" 
                                 id="column-balance" 
-                                name="column-balance" 
                                 class="form-control form-control-sm">
                               <option *ngFor="let letter of alphabet" [value]="letter"> {{ letter }} </option>
                             </select>

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { Bank } from '../../../shared/models/bank';
 import { BankStatement } from '../../../shared/models/bank.statement';
 import { FileExtension } from '../../../shared/models/file.extension';
 import { BankStatementUploadService } from './service/bank-statement-upload.service';
 import { dateRangeCustomValidator } from './validation/date.range.custom.validator';
 import { verifyMaximumPeriod } from './validation/verify.maximum.period';
-import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
-import { Bank } from '../../../shared/models/bank';
+import { TokenService } from '../../../shared/service/token.service';
+import { Login } from '../../../shared/models/login';
 
 @Component({
   templateUrl: './bank-statement-upload.component.html'
@@ -17,6 +19,7 @@ export class BankStatementUploadComponent implements OnInit {
   files: File[] = [];
   previews: string[] = [];
   bankStatementForm: FormGroup;
+  login: Login;
   enableColumnControls: boolean = false;
   supportedExtensions: string = '.pdf,.xls,.xlsx,.csv,.pdf';
   acceptedExtensions: string = '.pdf';
@@ -34,17 +37,19 @@ export class BankStatementUploadComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private uploadService: BankStatementUploadService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
+    this.login = this.tokenService.getUser();
     let now: Date = new Date();
     now.setDate(now.getDate() - 1);
     const today: string = now.toISOString().substring(0, 10);
     now.setDate(now.getDate() - 90);
     const suggestedStart: string = now.toISOString().substring(0, 10);
     this.bankStatementForm = this.formBuilder.group({
-      account: [ '',[ Validators.required ] ],
+      bankAccount: [ '',[ Validators.required ] ],
       periodStart: [ suggestedStart, [ dateRangeCustomValidator ] ],
       periodEnd:  [ today, [ dateRangeCustomValidator ] ],
       fileExtension: [ this.extensions.PDF ],
@@ -60,10 +65,11 @@ export class BankStatementUploadComponent implements OnInit {
 
   onUpload(): void {
     const statementUploadDTO = this.bankStatementForm.getRawValue() as BankStatement;
+    console.log(statementUploadDTO);
     this.uploadService
       .upload(statementUploadDTO, this.files[0])
       .pipe(finalize(() => {
-        this.router.navigate(['/wallet/uploads', this.accountToRedirect]);
+        this.router.navigate(['/wallet/uploads']);
       }))
       .subscribe(r => {
         const status = r.status;

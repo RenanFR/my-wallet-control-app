@@ -24,7 +24,8 @@ export class BankStatementListComponent implements OnInit, OnDestroy {
         .getByAccount()
         .subscribe(response => {
           this.bankStatements = response;
-          this.connect(this.tokenService.getUserId());
+          console.log(this.tokenService.getUser()._id);        
+          this.connect(this.tokenService.getUser()._id);
         });
   }
 

@@ -18,12 +18,18 @@ export class RequestInterceptor implements HttpInterceptor {
         let hasSkipHeader: boolean = req.headers.has(INTERCEPTOR_SKIP_HEADER);
         if (this.tokenService.isTokenSet() && !hasSkipHeader) {
             const token = this.tokenService.getToken();
-            this.headers = this.headers.set('Authorization', token);
+            console.log(token);
+            this.headers = this.headers.delete('Authorization');
+            this.headers = this.headers.append('Authorization', token);
+            // this.headers = this.headers.append('X-Requested-With', 'XMLHttpRequest');
+            console.log(this.headers);
             req = req.clone({
                 headers: this.headers
             });
         } else if (hasSkipHeader) {
             this.headers = req.headers.delete(INTERCEPTOR_SKIP_HEADER);
+            // this.headers = this.headers.append('X-Requested-With', 'XMLHttpRequest');
+            console.log(this.headers);
             req = req.clone({
                 headers: this.headers
             });

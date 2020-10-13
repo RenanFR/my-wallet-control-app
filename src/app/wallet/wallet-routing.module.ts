@@ -26,7 +26,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'uploads/:account',
+        path: 'uploads',
         component: BankStatementListComponent,
         data: {
           title: 'UPLOADS'
@@ -40,7 +40,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'expenses/categories/:account',
+        path: 'expenses/categories',
         component: ExpenseCategoryComponent,
         data: {
           title: 'CATEGORIAS DE DESPESA'

@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { share } from 'rxjs/internal/operators/share';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { INTERCEPTOR_SKIP_HEADER } from '../global/request.interceptor';
 import { Login } from '../models/login';
@@ -17,9 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public getToken(username: string, password: string): Observable<OAuthToken> {
-  // public getToken(username: string, password: string) {
-    console.log(environment.clientId);
-    console.log(environment.clientSecret);
+    console.log('REALIZANDO CHAMADA DE AUTENTICAÇÃO AO SERVIDOR');
     const headers: HttpHeaders = new HttpHeaders()
         .append('Content-Type', 'application/x-www-form-urlencoded')
         .append(INTERCEPTOR_SKIP_HEADER, 'true')
@@ -28,10 +28,9 @@ export class AuthService {
         .set('grant_type', 'password')
         .set('username', username)
         .set('password', password);
-    console.log(tokenUrl);
-    console.log(headers.get('Authorization'));
-    console.log(body.get('grant_type'));
-    return this.http.post<OAuthToken>(tokenUrl, body, { headers });
+    return this.http.post<OAuthToken>(tokenUrl, body, { headers }).pipe(tap(token => {
+      console.log('RESPOSTA APÓS AUTENTICAÇÃO: ' + token.access_token);
+    }));
   }
 
   public registerUser(login: Login): Observable<any> {
@@ -41,5 +40,5 @@ export class AuthService {
   public getUserInfo(): Observable<Login> {
     return this.http.get<Login>(baseUrl);
   }
-  
+
 }

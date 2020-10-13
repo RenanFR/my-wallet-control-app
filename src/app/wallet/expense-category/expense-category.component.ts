@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ExpenseCategory } from '../../shared/models/expense-category';
 import { ExpenseCategoryService } from './service/expense-category.service';
@@ -17,7 +16,6 @@ export class ExpenseCategoryComponent implements OnInit {
   @ViewChild('newCategory') public newCategory: ElementRef<HTMLInputElement>;
 
   constructor(
-    private route: ActivatedRoute,
     private expenseCategoryService: ExpenseCategoryService
   ) { }
   

@@ -2,7 +2,7 @@ import { BankAccount } from './bank.account';
 
 export class Login {
 	
-    id: string;
+    _id: string;
 
     userEmail: string;
 
@@ -12,11 +12,7 @@ export class Login {
 
     passwordConfirm: string;
 
-    bitcoinBalance: number;
-
     cpf: string;
-
-    easynvestPassword: string;
 
     bankAccounts: BankAccount[] = [];
 
