@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
@@ -13,7 +14,10 @@ const tokenCheckUrl: string = `${environment.SERVER_URL}/oauth/check_token`;
 @Injectable()
 export class TokenService {
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private router: Router
+    ) { }
 
     storeToken(token: OAuthToken): void {
         window.localStorage.setItem('token', JSON.stringify(token));
@@ -44,9 +48,10 @@ export class TokenService {
             .pipe(map(response => !!response.active))
             .pipe(catchError((error: HttpErrorResponse) => {
                 if (error.status === 400) {
+                    this.router.navigate(['/login']);
                     console.log('PROBLEMA AO VALIDAR O TOKEN: ' + error.error.error_description);
-                    return of(false);
                 }
+                return of(false);
               }));
       }    
 

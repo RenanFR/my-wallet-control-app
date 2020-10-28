@@ -18,9 +18,8 @@ export class isLoggedGuard implements CanActivate {
             if (!!token) {
                 return this.tokenService.isTokenValid(this.tokenService.getTokenRaw());
             }
-        } else {
-            this.router.navigate(['/login']);
-            return false;
         }
+        this.router.navigate(['/login']);
+        return false;
     }
 }

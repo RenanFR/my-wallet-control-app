@@ -21,14 +21,12 @@ export class RequestInterceptor implements HttpInterceptor {
             console.log(token);
             this.headers = this.headers.delete('Authorization');
             this.headers = this.headers.append('Authorization', token);
-            // this.headers = this.headers.append('X-Requested-With', 'XMLHttpRequest');
             console.log(this.headers);
             req = req.clone({
                 headers: this.headers
             });
         } else if (hasSkipHeader) {
             this.headers = req.headers.delete(INTERCEPTOR_SKIP_HEADER);
-            // this.headers = this.headers.append('X-Requested-With', 'XMLHttpRequest');
             console.log(this.headers);
             req = req.clone({
                 headers: this.headers
