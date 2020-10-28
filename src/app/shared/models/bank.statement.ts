@@ -28,7 +28,7 @@ export class BankStatement {
 
 	columnBalance: string;
 
-	entries: BankStatementEntry[ ];
+	entries: BankStatementEntry[ ] = [ ];
 
 	preSignedURL: string;
 	

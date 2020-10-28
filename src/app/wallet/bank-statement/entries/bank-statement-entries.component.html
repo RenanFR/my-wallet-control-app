@@ -17,7 +17,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let entry of bankStatement?.entries">
+                <tr *ngFor="let entry of bankStatement?.entries | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                   <td>{{entry.date}}</td>
                   <td>{{entry.description}}</td>
                   <td>{{entry.value}}</td>
@@ -25,18 +25,11 @@
                 </tr>
               </tbody>
             </table>
-            <nav>
-              <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
-            </nav>
+            <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize"
+              [collectionSize]="bankStatement?.entries.length">
+          </ngb-pagination>   
           </div>
         </div>
       </div>

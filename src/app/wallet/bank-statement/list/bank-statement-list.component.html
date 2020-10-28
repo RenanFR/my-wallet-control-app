@@ -18,7 +18,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let statement of bankStatements">
+              <tr *ngFor="let statement of bankStatements | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                 <td>
                   <a *ngIf="statement.status === 'SUCCEEDED'" [routerLink]="['/wallet/entries', statement._id]">{{statement._id}}</a>
                   <b *ngIf="statement.status !== 'SUCCEEDED'">{{statement._id}}</b>
@@ -39,18 +39,11 @@
               </tr>
             </tbody>
           </table>
-          <nav>
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="bankStatements.length">
+          </ngb-pagination>    
         </div>
       </div>
     </div>

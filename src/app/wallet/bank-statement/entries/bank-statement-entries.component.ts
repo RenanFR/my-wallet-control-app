@@ -8,7 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BankStatementEntriesComponent implements OnInit {
 
-  bankStatement: BankStatement;
+  bankStatement: BankStatement = new BankStatement();
+  page = 1;
+  pageSize = 20;
 
   constructor(
     private route: ActivatedRoute,

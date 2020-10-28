@@ -8,9 +8,11 @@ import { ExpenseCategoryService } from './service/expense-category.service';
 })
 export class ExpenseCategoryComponent implements OnInit {
 
-  userCategories: ExpenseCategory[];
-  categoriesToSee: ExpenseCategory[];
-  detailingCategory: ExpenseCategory;
+  userCategories: ExpenseCategory[ ] = [ ];
+  categoriesToSee: ExpenseCategory[ ] = [ ];
+  detailingCategory: ExpenseCategory = new ExpenseCategory();
+  page = 1;
+  pageSize = 20;
   
   @ViewChild('addNewModal') public addNewModal: ModalDirective;
   @ViewChild('newCategory') public newCategory: ElementRef<HTMLInputElement>;

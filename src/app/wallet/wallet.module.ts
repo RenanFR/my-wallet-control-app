@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { NotificationsModule } from '../views/notifications/notifications.module';
 import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
@@ -30,7 +31,8 @@ import { WalletRoutingModule } from './wallet-routing.module';
     MatProgressBarModule,
     NotificationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     BankStatementUploadService,

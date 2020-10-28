@@ -10,8 +10,10 @@ import { WebSocketAPI } from './websocket-api';
 })
 export class BankStatementListComponent implements OnInit, OnDestroy {
 
-  bankStatements: BankStatement[];
+  bankStatements: BankStatement[ ] = [ ];
   webSocketAPI: WebSocketAPI;
+  page = 1;
+  pageSize = 20;
 
   constructor(
     private tokenService: TokenService,
