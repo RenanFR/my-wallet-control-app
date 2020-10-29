@@ -1,3 +1,5 @@
+import { ExpenseCategory } from './expense-category';
+
 export class BankStatementEntry {
 	
     date: string;
@@ -9,5 +11,7 @@ export class BankStatementEntry {
     balanceAfter: number;
 
     lineNumber: number;
+
+    category: ExpenseCategory = new ExpenseCategory();
 	
 }

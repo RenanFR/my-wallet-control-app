@@ -14,6 +14,7 @@
                   <th>DESCRIÇÃO</th>
                   <th>VALOR</th>
                   <th>SALDO APÓS A MOVIMENTAÇÃO</th>
+                  <th>CATEGORIA DE DESPESA</th>
                 </tr>
               </thead>
               <tbody>
@@ -22,6 +23,11 @@
                   <td>{{entry.description}}</td>
                   <td>{{entry.value}}</td>
                   <td>{{entry.balanceAfter}}</td>
+                  <td>
+                    <select id="select1" name="select1" class="form-control">
+                      <option *ngFor="let category of expenseCategories" [value]="category">{{category.name}}</option>
+                    </select>
+                  </td>
                 </tr>
               </tbody>
             </table>
