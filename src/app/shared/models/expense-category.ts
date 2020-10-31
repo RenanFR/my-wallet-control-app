@@ -1,5 +1,7 @@
+import { CategoryType } from './category-type.enum';
+
 export class ExpenseCategory {
-	
+
     id: number;
 
     name: string;
@@ -8,6 +10,10 @@ export class ExpenseCategory {
 
     level: number;
 
-    childrenCategories: ExpenseCategory[];
+    childrenCategories: ExpenseCategory[] = [];
+    
+    parent: ExpenseCategory;
+
+    categoryType: CategoryType;
 
 }

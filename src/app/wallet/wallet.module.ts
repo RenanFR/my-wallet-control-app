@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { NotificationsModule } from '../views/notifications/notifications.module';
 import { BankStatementEntriesComponent } from './bank-statement/entries/bank-statement-entries.component';
+import { BankStatementEntryLineComponent } from './bank-statement/entries/bank-statement-entry-line.component';
 import { BankStatementListComponent } from './bank-statement/list/bank-statement-list.component';
 import { BankStatementService } from './bank-statement/service/bank-statement.service';
 import { BankStatementUploadComponent } from './bank-statement/upload/bank-statement-upload.component';
@@ -22,7 +23,8 @@ import { WalletRoutingModule } from './wallet-routing.module';
     BankStatementUploadComponent,
     FinancialDashboardComponent,
     BankStatementListComponent,
-    ExpenseCategoryComponent
+    ExpenseCategoryComponent,
+    BankStatementEntryLineComponent
   ],
   imports: [
     CommonModule,

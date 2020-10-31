@@ -6,16 +6,21 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { isLoggedGuard } from './global/is.logged.guard';
 import { RequestInterceptor } from './global/request.interceptor';
 import { ErrorComponent } from './messages/error.component';
+import { CategoriesFilterPipe } from './pipe/categories-filter.pipe';
 import { TokenService } from './service/token.service';
 
 
 
 @NgModule({
-  declarations: [ErrorComponent],
+  declarations: [
+    ErrorComponent,
+    CategoriesFilterPipe
+  ],
   exports: [
     ErrorComponent,
     AlertModule,
-    ModalModule
+    ModalModule,
+    CategoriesFilterPipe
   ],
   imports: [
     CommonModule,

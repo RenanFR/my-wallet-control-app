@@ -8,55 +8,55 @@ import { ExpenseCategoryService } from './service/expense-category.service';
 })
 export class ExpenseCategoryComponent implements OnInit {
 
-  userCategories: ExpenseCategory[ ] = [ ];
-  categoriesToSee: ExpenseCategory[ ] = [ ];
+  userCategories: ExpenseCategory[] = [];
+  categoriesToSee: ExpenseCategory[] = [];
   detailingCategory: ExpenseCategory = new ExpenseCategory();
   page = 1;
   pageSize = 20;
-  
+
   @ViewChild('addNewModal') public addNewModal: ModalDirective;
   @ViewChild('newCategory') public newCategory: ElementRef<HTMLInputElement>;
 
   constructor(
     private expenseCategoryService: ExpenseCategoryService
   ) { }
-  
+
   ngOnInit(): void {
     this.detailingCategory = null;
     this.expenseCategoryService
-        .getByAccount()
-        .subscribe(response => {
-          this.userCategories = response;
-          this.categoriesToSee = this.userCategories.filter(cat => cat.level === 1);
-        });    
+      .getByAccount()
+      .subscribe(response => {
+        this.userCategories = response;
+        this.categoriesToSee = this.userCategories.filter(cat => cat.level === 1);
+      });
   }
 
   hasChildrenCategories(category: ExpenseCategory): boolean {
     return category.childrenCategories !== null && category.childrenCategories.length > 0;
-  }    
+  }
 
   changeLevel(category: ExpenseCategory): void {
     this.categoriesToSee = category.childrenCategories;
     this.detailingCategory = category;
-  }    
-  
+  }
+
   private returnRootLevel(): void {
     this.detailingCategory = null;
     this.categoriesToSee = this.userCategories.filter(cat => cat.level === 1);
-  } 
+  }
 
   findParentCategoryOf(category: ExpenseCategory): void {
     this.expenseCategoryService
-        .getParentCategory(category)
-        .subscribe(response => {
-          this.detailingCategory = response;
-          if (response === null) {
-            this.returnRootLevel();
-          } else {
-            this.categoriesToSee = this.userCategories.filter(cat => response.id === cat.id)[0].childrenCategories;
-          }
-        });
-  } 
+      .getParentCategory(category)
+      .subscribe(response => {
+        this.detailingCategory = response;
+        if (response === null) {
+          this.returnRootLevel();
+        } else {
+          this.categoriesToSee = this.userCategories.filter(cat => response.id === cat.id)[0].childrenCategories;
+        }
+      });
+  }
 
   addNew(): void {
     let parentCategory: ExpenseCategory;
@@ -68,9 +68,9 @@ export class ExpenseCategoryComponent implements OnInit {
     this.expenseCategoryService
       .addNew(parentCategory, this.newCategory.nativeElement.value)
       .subscribe(response => {
-            this.ngOnInit();
-            this.addNewModal.hide();
-      });    
-  } 
+        this.ngOnInit();
+        this.addNewModal.hide();
+      });
+  }
 
 }
