@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { flatMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { BankStatement } from '../../../shared/models/bank.statement';
 import { ExpenseCategory } from '../../../shared/models/expense-category';
 import { ExpenseCategoryService } from '../../expense-category/service/expense-category.service';
 import { BankStatementService } from '../service/bank-statement.service';
 
 @Component({
-  templateUrl: './bank-statement-entries.component.html'
+  templateUrl: './bank-statement-entries.component.html',
+  styleUrls: ['./bank-statement-entries.component.css']
 })
 export class BankStatementEntriesComponent implements OnInit {
 
@@ -33,6 +35,14 @@ export class BankStatementEntriesComponent implements OnInit {
       .subscribe(response => {
         this.expenseCategories = response;
       });
+  }
+
+  saveEntriesClassification(): void {
+    this.expenseCategoryService
+      .updateAllEntriesCategory(this.bankStatement)
+      .subscribe(() => {
+        Swal.fire("DESPESAS ATUALIZADAS!", "AS NOVAS CLASSIFICAÇÕES DE SUAS DESPESAS FORAM SALVAS!", "success");
+      });    
   }
 
 }
